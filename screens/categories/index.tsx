@@ -1,8 +1,16 @@
 import React from "react";
 import { FlatList, Pressable, Text, StyleSheet } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/App";
 import { CATEGORIES } from "@/data/dummy-data";
 
-const CategoriesScreen: React.FC = () => {
+type Props = NativeStackScreenProps<RootStackParamList, "categories">;
+
+const CategoriesScreen = ({ navigation }: Props) => {
+  const pressHandler = (categoryId: string) => {
+    navigation.navigate("category", { categoryId });
+  };
+
   return (
     <FlatList
       numColumns={2}
@@ -13,6 +21,7 @@ const CategoriesScreen: React.FC = () => {
             styles.category,
             { backgroundColor: item.color, opacity: pressed ? 0.75 : 1 },
           ]}
+          onPress={pressHandler.bind(this, item.id)}
         >
           <Text style={styles.categoryText}>{item.title}</Text>
         </Pressable>

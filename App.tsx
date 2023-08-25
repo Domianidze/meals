@@ -1,9 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import CategoriesScreen from "@/screens/categories";
+import CategoryScreen from "./screens/category";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  categories: undefined;
+  category: { categoryId: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -18,6 +24,7 @@ export default function App() {
               title: "Categories",
             }}
           />
+          <Stack.Screen name="category" component={CategoryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
