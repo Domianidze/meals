@@ -42,9 +42,6 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 18,
-    fontWeight: "600",
-  },
-  categoryPressed: {
-    opacity: 0.8,
+    fontWeight: "500",
   },
 });
