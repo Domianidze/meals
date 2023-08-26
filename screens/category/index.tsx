@@ -11,7 +11,9 @@ type Props = NativeStackScreenProps<RootStackParamList, "category">;
 const CategoryScreen = ({ navigation, route }: Props) => {
   const { categoryId } = route.params;
 
-  const meals = MEALS.filter((item) => item.categoryIds.includes(categoryId));
+  const clickHandler = (mealId: string) => {
+    navigation.navigate("meal", { mealId });
+  };
 
   React.useLayoutEffect(() => {
     const category = CATEGORIES.find((item) => item.id === categoryId);
@@ -20,6 +22,8 @@ const CategoryScreen = ({ navigation, route }: Props) => {
 
     navigation.setOptions({ title: category.title });
   }, [categoryId]);
+
+  const meals = MEALS.filter((item) => item.categoryIds.includes(categoryId));
 
   return (
     <FlatList
@@ -30,6 +34,7 @@ const CategoryScreen = ({ navigation, route }: Props) => {
             styles.meal,
             { opacity: pressed ? 0.75 : 1 },
           ]}
+          onPress={clickHandler.bind(this, item.id)}
         >
           <View style={styles.mealImage}>
             <UIImage source={{ uri: item.imageUrl }} />
@@ -72,12 +77,16 @@ const styles = StyleSheet.create({
   },
   mealDescription: {
     flex: 1,
-    justifyContent: "space-evenly",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    justifyContent: "center",
     alignItems: "center",
+    gap: 4,
   },
   mealTitle: {
     fontSize: 18,
     fontWeight: "500",
+    textAlign: "center",
   },
   mealTags: {
     flexDirection: "row",

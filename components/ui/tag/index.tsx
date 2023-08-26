@@ -1,9 +1,13 @@
 import React, { PropsWithChildren } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ViewStyle } from "react-native";
 
-const UITag: React.FC<PropsWithChildren> = ({ children }) => {
+type Props = {
+  style?: ViewStyle;
+};
+
+const UITag: React.FC<PropsWithChildren<Props>> = ({ children, style }) => {
   return (
-    <View style={styles.tag}>
+    <View style={[styles.tag, style]}>
       <Text style={styles.tagText}>{children}</Text>
     </View>
   );
@@ -22,6 +26,7 @@ const styles = StyleSheet.create({
   tagText: {
     fontSize: 12,
     color: "white",
+    textAlign: "center",
     textTransform: "capitalize",
   },
 });
