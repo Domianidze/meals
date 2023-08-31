@@ -1,10 +1,10 @@
 import React from "react";
 import { FlatList, Pressable, Text, StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/App";
+import { HomeStackParamList } from "@/App";
 import { CATEGORIES } from "@/data/dummy-data";
 
-type Props = NativeStackScreenProps<RootStackParamList, "categories">;
+type Props = NativeStackScreenProps<HomeStackParamList, "categories">;
 
 const CategoriesScreen = ({ navigation }: Props) => {
   const pressHandler = (categoryId: string) => {

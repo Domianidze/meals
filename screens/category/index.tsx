@@ -1,12 +1,12 @@
 import React from "react";
 import { FlatList, Pressable, View, Text, StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/App";
+import { HomeStackParamList } from "@/App";
 import UIImage from "@/components/ui/image";
 import UITag from "@/components/ui/tag";
 import { CATEGORIES, MEALS } from "@/data/dummy-data";
 
-type Props = NativeStackScreenProps<RootStackParamList, "category">;
+type Props = NativeStackScreenProps<HomeStackParamList, "category">;
 
 const CategoryScreen = ({ navigation, route }: Props) => {
   const { categoryId } = route.params;

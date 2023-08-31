@@ -1,14 +1,14 @@
 import React from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/App";
+import { HomeStackParamList } from "@/App";
 import UIImage from "@/components/ui/image";
 import UITag from "@/components/ui/tag";
 import UIList from "@/components/ui/list";
 import { MEALS } from "@/data/dummy-data";
 import BookmarkButton from "./components/bookmark-button";
 
-type Props = NativeStackScreenProps<RootStackParamList, "meal">;
+type Props = NativeStackScreenProps<HomeStackParamList, "meal">;
 
 const MealScreen = ({ navigation, route }: Props) => {
   const { mealId } = route.params;
