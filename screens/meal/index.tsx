@@ -6,19 +6,24 @@ import UIImage from "@/components/ui/image";
 import UITag from "@/components/ui/tag";
 import UIList from "@/components/ui/list";
 import { MEALS } from "@/data/dummy-data";
+import BookmarkButton from "./components/bookmark-button";
 
 type Props = NativeStackScreenProps<RootStackParamList, "meal">;
 
-const MealScreen = ({ route }: Props) => {
+const MealScreen = ({ navigation, route }: Props) => {
   const { mealId } = route.params;
 
   const meal = MEALS.find((item) => item.id === mealId);
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <BookmarkButton isBookmarked={false} />,
+    });
+  }, []);
+
   if (!meal) {
     return null;
   }
-
-  console.log(meal);
 
   return (
     <ScrollView>
