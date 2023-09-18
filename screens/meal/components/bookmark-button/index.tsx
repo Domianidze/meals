@@ -4,11 +4,15 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 type Props = {
   isBookmarked?: boolean;
+  onPress?: () => void;
 };
 
-const BookmarkButton: React.FC<Props> = ({ isBookmarked }) => {
+const BookmarkButton: React.FC<Props> = ({ isBookmarked, onPress }) => {
   return (
-    <Pressable style={({ pressed }) => (pressed ? styles.buttonPressed : {})}>
+    <Pressable
+      style={({ pressed }) => (pressed ? styles.buttonPressed : {})}
+      onPress={onPress}
+    >
       <Ionicons
         name={isBookmarked ? "bookmark" : "bookmark-outline"}
         size={26}

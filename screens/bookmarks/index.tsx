@@ -1,14 +1,14 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { RootTabParamList } from "@/App";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import MealsList from "@/components/meals-list";
+import { MEALS } from "@/data/dummy-data";
 
-type Props = BottomTabScreenProps<RootTabParamList, "bookmarks">;
+const BookmarksScreen = () => {
+  const bookmarkIds = useSelector((state: RootState) => state.bookmarks.ids);
+  const meals = MEALS.filter((meal) => bookmarkIds.includes(meal.id));
 
-const BookmarksScreen = ({ navigation, route }: Props) => {
-  return <View></View>;
+  return <MealsList meals={meals} />;
 };
 
 export default BookmarksScreen;
-
-const styles = StyleSheet.create({});

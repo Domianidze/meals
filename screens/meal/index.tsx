@@ -1,6 +1,9 @@
 import React from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleBookmark } from "@/store/reducers/bookmarksReducer";
+import { RootState } from "@/store";
 import { HomeStackParamList } from "@/App";
 import UIImage from "@/components/ui/image";
 import UITag from "@/components/ui/tag";
@@ -13,13 +16,25 @@ type Props = NativeStackScreenProps<HomeStackParamList, "meal">;
 const MealScreen = ({ navigation, route }: Props) => {
   const { mealId } = route.params;
 
+  const dispatch = useDispatch();
+  const bookmarkIds = useSelector((state: RootState) => state.bookmarks.ids);
+
   const meal = MEALS.find((item) => item.id === mealId);
+  const isBookmarked = meal && bookmarkIds.includes(meal.id);
+
+  const bookmarkHandler = () => {
+    if (!meal) return;
+
+    dispatch(toggleBookmark(meal.id));
+  };
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <BookmarkButton isBookmarked={false} />,
+      headerRight: () => (
+        <BookmarkButton isBookmarked={isBookmarked} onPress={bookmarkHandler} />
+      ),
     });
-  }, []);
+  }, [isBookmarked]);
 
   if (!meal) {
     return null;
